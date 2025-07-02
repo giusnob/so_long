@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giusnob <giusnob@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:46:49 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/01 15:47:00 by giusnob          ###   ########.fr       */
+/*   Updated: 2025/07/02 22:44:48 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	validate_map(t_game *g, const char *file)
 {
+	g->map.height = map_height(file) - 1;
 	if (!load_map(file, &g->map))
 		return (ft_printf("Error: failed to load map\n"), 0);
 	map_width(&g->map);

@@ -6,13 +6,13 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:14:14 by ginobile          #+#    #+#             */
-/*   Updated: 2024/12/17 22:06:46 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:38:31 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	len_s1;
 	size_t	len_s2;

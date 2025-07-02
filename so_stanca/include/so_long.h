@@ -17,6 +17,7 @@
 # include <fcntl.h>
 #include <string.h>
 # include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line.h"
 # include "mlx/mlx.h"
 
 // ─── Window / Tile sizes ────────────────────────────────────────────────────
@@ -99,7 +100,11 @@ void	destroy_textures(t_game *g);
 
 // utilities 
 int		has_ber_extension(const char *path);
+void	move_player(t_game *g, int dx, int dy);
+int		count_collectibles(char **map, int height);
+int		map_height(const char *s);
 void	free_game(t_game *g);
+int		init_game(t_game *g);
 
 // helper per check_path
 char	**copy_map(char **map, int height);

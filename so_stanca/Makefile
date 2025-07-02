@@ -3,24 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: giusnob <giusnob@student.42.fr>            +#+  +:+       +#+         #
+#    By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/30 20:58:41 by giusnob           #+#    #+#              #
-#    Updated: 2025/07/01 16:14:27 by giusnob          ###   ########.fr        #
+#    Updated: 2025/07/02 20:18:52 by ginobile         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I. -Iinclude -Ift_printf/libft -Ift_printf
 
 FT_DIR   = ft_printf
 MLX_DIR  = mlx
+
 INCLUDES = -Iinclude -I$(FT_DIR)/libft -I$(FT_DIR)
 
 SRC = $(addprefix srcs/, \
-    main.c load_map.c map_parser_utils.c map_utils.c check_map.c \
-    flood_fill.c init_game.c handle_input.c render_map.c sprite.c)
+    main.c load_map.c utils.c check_path.c check_map.c \
+    validate_map.c init_game.c handle_input.c render.c textures.c)
 
 OBJ = $(SRC:.c=.o)
 

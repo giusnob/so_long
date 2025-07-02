@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giusnob <giusnob@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:28:48 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/01 16:03:33 by giusnob          ###   ########.fr       */
+/*   Updated: 2025/07/02 22:52:46 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
 static int	is_rectangular(char **map, int height)
 {
 	int	width;
-	int	row;
 
 	if (!map || height <= 0)
 		return (0);
 	width = ft_strlen(map[0]);
-	row = 1;
-	while (row < height)
-	{
-		if ((int)ft_strlen(map[row++]) != width)
-			return (0);
-	}
+	if (width == height)
+		return (0);
 	return (1);
 }
 
@@ -37,16 +32,14 @@ static int	validate_walls(char **map, int h, int w)
 	col = 0;
 	while (col < w)
 	{
-		if (map[0][col] != '1' ||
-		    map[h - 1][col] != '1')
+		if (map[0][col] != '1' || map[h - 1][col] != '1')
 			return (ft_printf("Error: border not closed\n"), 0);
 		col++;
 	}
 	row = 1;
 	while (row < h - 1)
 	{
-		if (map[row][0] != '1' ||
-		    map[row][w - 1] != '1')
+		if (map[row][0] != '1' || map[row][w - 1] != '1')
 			return (ft_printf("Error: border not closed\n"), 0);
 		row++;
 	}

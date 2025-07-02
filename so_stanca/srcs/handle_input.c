@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giusnob <giusnob@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:38:22 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/01 15:47:51 by giusnob          ###   ########.fr       */
+/*   Updated: 2025/07/02 19:40:46 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	handle_keypress(int key, t_game *g)
 int	handle_key_release(int key, t_game *g)
 {
 	(void)key;
+	(void)&g;
 	return (0);
 }
 
