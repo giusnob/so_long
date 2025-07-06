@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:55 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/02 22:49:48 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:55:24 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,29 @@ static int	find_player(char **map, int h, int *px, int *py)
 	return (0);
 }
 
-//Trova la posizione iniziale del player ('P')
+int	count_collectibles(char **map, int height)
+{
+	int	cnt;
+	int	y;
+	int	x;
+
+	cnt = 0;
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (map[y][x])
+			if (map[y][x++] == 'C')
+				cnt++;
+		y++;
+	}
+	return (cnt);
+}
+
+
 static void	flood(char **m, int x, int y)
 {
-	if (!m[y] || !m[y][x] || m[y][x] == '1' || m[y][x] == 'F' ||
-	    m[y][x] == 'E' || m[y][x] == '\n')
+	if (!m[y] || !m[y][x] || m[y][x] == '1' || m[y][x] == 'F' || m[y][x] == '\n')
 		return ;
 	m[y][x] = 'F';
 	flood(m, x + 1, y);
@@ -50,41 +68,58 @@ static void	flood(char **m, int x, int y)
 	flood(m, x, y - 1);
 }
 //Ritorna 1 se c'è ancora 'C' o 'E' non raggiunti
-// static int	has_unreach(char **m, int h, int w)
-// {
-// 	int	y;
-// 	int	x;
+static int	has_unreached(char **m, int h, int w)
+{
+	int	y;
+	int	x;
 
-// 	y = 0;
-// 	while (y < h)
-// 	{
-// 		x = 0;
-// 		while (x < w)
-// 		{
-// 			if (m[y][x] == 'C' || m[y][x] == 'E')
-// 				return (1);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (0);
-// }
+	y = 0;
+	while (y < h)
+	{
+		x = 0;
+		while (x < w)
+		{
+			if (m[y][x] == 'C' || m[y][x] == 'E')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 //verifica che tutte le 'C' (e l'Uscita) siano raggiungibili
-int	check_path(char **map, int h, int w)
+
+/* static void	print_map(char **map, int height)
+{
+	int	y;
+	
+	y = 0;
+	while (y < height)
+	{
+		printf("%s\n", map[y]);
+		y++;
+	}
+} */
+
+int	check_path(t_map map, t_point *player_pos, int *collect)
 {
 	char	**tmp;
 	int		px;
 	int		py;
 
-	tmp = copy_map(map, h);
+	tmp = copy_map(map.map, map.height);
 	if (!tmp)
 		return (ft_printf("Error: malloc failed\n"), 0);
-	if (!find_player(tmp, h, &px, &py))
-		return (free_copy(tmp, h), 0);
+	if (!find_player(tmp, map.height, &px, &py))
+		return (free_copy(tmp, map.height), 0);
+	*collect = count_collectibles(map.map, map.height);
 	flood(tmp, px, py);
-	if (check_path(tmp, h, w)) //if (has_unreach(tmp, h, w))
-		return (free_copy(tmp, h),
+	if (has_unreached(tmp, map.height, map.width))
+		return (free_copy(tmp, map.height),
 			ft_printf("Error: unreachable element\n"), 0);
-	free_copy(tmp, h);
+	free_copy(tmp, map.height);
+	player_pos->x = px;
+	player_pos->y = py;
 	return (1);
 }

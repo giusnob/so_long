@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 15:33:14 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/02 21:33:09 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/06 21:57:34 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	run_game(char *mapfile)
 		return (free_map(&g.map), 0);
 	render_map(&g);
 	mlx_hook(g.win_ptr, 2, 1L << 0, handle_keypress, &g);
-	mlx_hook(g.win_ptr, 3, 1L << 1, handle_key_release, &g);
+	/* mlx_hook(g.win_ptr, 3, 1L << 1, handle_key_release, &g); */
 	mlx_hook(g.win_ptr, 17, 0, handle_destroy, &g);
 	mlx_loop(g.mlx_ptr);
 	free_game(&g);

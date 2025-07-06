@@ -58,6 +58,12 @@ typedef enum e_dir
 	DIR_RIGHT
 }				t_dir;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
 // ─── Main game structure ──────────────────────────────────────────────────
 typedef struct s_game
 {
@@ -74,7 +80,10 @@ typedef struct s_game
 	void	*img_player_d;
 	void	*img_player_l;
 	void	*img_player_r;
+
+	int		collect;
 	t_dir	player_dir;
+	t_point	player_pos;
 }				t_game;
 
 // map loader & validator 
@@ -83,7 +92,7 @@ void	free_map(t_map *map);
 void	map_width(t_map *map);
 
 int		check_map(char **map, int height);
-int		check_path(char **map, int height, int width);
+int		check_path(t_map map, t_point *player_pos, int *collect);
 int		validate_map(t_game *g, const char *file);
 
 // rendering 

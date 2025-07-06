@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:52:26 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/02 20:11:13 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/06 22:04:58 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render_map(t_game *g)
 		x = 0;
 		while (x < g->map.width)
 		{
-			draw_tile(g, g->map.map[y][x], x + 1, y);
+			draw_tile(g, g->map.map[y][x], x, y);
 			x++;
 		}
 		y++;
@@ -61,53 +61,41 @@ void	render_map(t_game *g)
 
 void	move_player(t_game *g, int dx, int dy)
 {
-	int	x;
-	int	y;
+	int		new_x;
+	int		new_y;
+	int		x;
+	int		y;
+	char 	next;
 
-	y = 0;
-	x = 0;
-	while (y < g->map.height)
+	x = g->player_pos.x;
+	y = g->player_pos.y;
+	new_x = x + dx;
+	new_y = y + dy;
+	next = g->map.map[new_y][new_x];
+	
+	if (next == 'C')
 	{
-		x = 0;
-		while (g->map.map[y][x] != 'P')
-			x++;
-		if (g->map.map[y][x] == 'P')
-			break ;
-		y++;
+		g->collect--;
+		g->map.map[y][x] = '0';
+		g->map.map[new_y][new_x] = 'P';
+		g->player_pos.x = new_x;
+		g->player_pos.y = new_y;
 	}
-	if (x + dx < 0 || x + dx >= g->map.width || y + dy < 0 || y + dy >= g->map.height ||
-	    g->map.map[y + dy][x + dx] == '1')
-		return ;
-	if (g->map.map[y + dy][x + dx] == 'E' &&
-	    count_collectibles(g->map.map, g->map.height) > 0)
-		return ;
-	if (g->map.map[y + dy][x + dx] == 'E' &&
-	    count_collectibles(g->map.map, g->map.height) == 0)
+	else if (next == '0')
 	{
-		ft_printf("You win in %d moves!\n", g->moves);
+		g->map.map[y][x] = '0';
+		g->map.map[new_y][new_x] = 'P';
+		g->player_pos.x = new_x;
+		g->player_pos.y = new_y;
+	}
+	else if (next == 'E' && g->collect == 0)
+	{
+		ft_printf("You win! Moves: %d\n", ++g->moves);
 		free_game(g);
 		exit(0);
 	}
-	g->map.map[y][x] = '0';
-	g->map.map[y + dy][x + dx] = 'P';
+	printf("valore y %d e valore x:%d\n", x, y);
+	printf("collect now in move player: %d\n", g->collect);
 	render_map(g);
-}
-int	count_collectibles(char **map, int height)
-{
-	int	cnt;
-	int	y;
-	int	x;
-
-	cnt = 0;
-	y = 0;
-	while (y < height)
-	{
-		x = 0;
-		while (map[y][x])
-			if (map[y][x++] == 'C')
-				cnt++;
-		y++;
-	}
-	return (cnt);
 }
 
