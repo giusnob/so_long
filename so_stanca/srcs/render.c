@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:52:26 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/07 17:04:41 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:36:38 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,21 @@ void	render_map(t_game *g)
 
 void	move_player(t_game *g, int dx, int dy)
 {
-	int		new_x;
-	int		new_y;
-	int		x;
-	int		y;
+	t_point	new;
 	char 	next;
 
-	x = g->player_pos.x;
-	y = g->player_pos.y;
-	new_x = x + dx;
-	new_y = y + dy;
-	next = g->map.map[new_y][new_x];
+	new.x = g->player_pos.x + dx;
+	new.y = g->player_pos.y + dy;
+	next = g->map.map[new.y][new.x];
 	
-	if (next == 'C')
+	if (next == 'C' || next == '0')
 	{
-		g->collect--;
-		g->map.map[y][x] = '0';
-		g->map.map[new_y][new_x] = 'P';
-		g->player_pos.x = new_x;
-		g->player_pos.y = new_y;
-	}
-	else if (next == '0')
-	{
-		g->map.map[y][x] = '0';
-		g->map.map[new_y][new_x] = 'P';
-		g->player_pos.x = new_x;
-		g->player_pos.y = new_y;
+		if (next == 'C')
+			g->collect--;
+		g->map.map[g->player_pos.y][g->player_pos.x] = '0';
+		g->map.map[new.y][new.x] = 'P';
+		g->player_pos.x = new.x;
+		g->player_pos.y = new.y;
 	}
 	else if (next == 'E' && g->collect == 0)
 	{

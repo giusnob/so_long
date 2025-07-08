@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:55 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/08 17:18:02 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:40:41 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	flood(char **m, int x, int y)
 	{
 		if (m[y][x] == 'E')
 			m[y][x] = 'F';
+
 		return ;
 	}
 	m[y][x] = 'F';
@@ -84,7 +85,7 @@ static int	has_unreached(char **m, int h, int w)
 		x = 0;
 		while (x < w)
 		{
-			if (m[y][x] == 'C' && m[y][x])
+			if (m[y][x] == 'C' || m[y][x] == 'E')
 				return (1);
 			x++;
 		}
