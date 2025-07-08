@@ -6,11 +6,12 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:27:11 by ginobile          #+#    #+#             */
-/*   Updated: 2025/02/25 15:35:32 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:27:06 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char	*read_and_store(int fd, char *remainder)
 {

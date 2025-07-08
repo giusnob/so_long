@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 12:36:38 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/02 22:42:05 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:49:11 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ static int	fill_map(int fd, t_map *map, int lines)
 	int		i;
 
 	i = 0;
-	while (i < lines && (line = get_next_line(fd)))
+	while ((line = get_next_line(fd)))
 	{
-		map->map[i++] = ft_strtrim(line, "\n");
+		if (i < lines)
+			map->map[i] = ft_strtrim(line, "\n");
 		free(line);
+		i++;
 	}
-	map->map[i] = NULL;
+	printf("i: %d\n", i);
+	map->map[lines] = NULL;
 	return (i == lines);
 }
 
@@ -61,6 +64,7 @@ int	load_map(const char *file, t_map *map)
 	close(fd);
 	if (map->height <= 0)
 		return (0);
+	printf("height: %d\n", map->height);
 	if (!alloc_map_array(map, map->height))
 		return (0);
 	fd = open_map_file(file);

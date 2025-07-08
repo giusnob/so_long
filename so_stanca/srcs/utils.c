@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:53:35 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/02 21:34:13 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:38:11 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	map_width(t_map *map)
 	if (!map || !map->map || !map->map[0])
 		return ;
 	len = ft_strlen(map->map[0]);
-	if (map->map[0][len - 1] == '\n')
-		len--;
 	map->width = len;
 }
 
@@ -110,6 +108,8 @@ void	free_copy(char **dup, int height)
 void	free_game(t_game *g)
 {
 	destroy_textures(g);
-	mlx_destroy_window(g->mlx_ptr, g ->win_ptr);
+	mlx_destroy_window(g->mlx_ptr, g->win_ptr);
+	mlx_destroy_display(g->mlx_ptr);
+	free(g->mlx_ptr);
 	free_map(&g->map);
 }

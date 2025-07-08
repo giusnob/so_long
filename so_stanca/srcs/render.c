@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:52:26 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/06 22:04:58 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:04:41 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void	move_player(t_game *g, int dx, int dy)
 		free_game(g);
 		exit(0);
 	}
-	printf("valore y %d e valore x:%d\n", x, y);
-	printf("collect now in move player: %d\n", g->collect);
 	render_map(g);
 }
 

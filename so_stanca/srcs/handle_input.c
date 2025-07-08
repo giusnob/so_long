@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:38:22 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/06 22:00:23 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:05:13 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	process_move(int dx, int dy, t_dir dir, t_game *g)
 {
-	printf("collect now in process: %d\n", g->collect);
 	g->player_dir = dir;
 	move_player(g, dx, dy);
 	ft_printf("Moves: %d\n", ++g->moves);
@@ -22,7 +21,6 @@ static void	process_move(int dx, int dy, t_dir dir, t_game *g)
 
 int	handle_keypress(int key, t_game *g)
 {
-	printf("collect now in handle: %d\n", g->collect);
 	if (key == KEY_ESC)
 		ft_printf("Quit\n"), free_game(g), exit(0);
 	else if (key == KEY_W)
