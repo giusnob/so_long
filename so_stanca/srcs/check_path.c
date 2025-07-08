@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:55 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/06 21:55:24 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:18:02 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,20 @@ int	count_collectibles(char **map, int height)
 
 static void	flood(char **m, int x, int y)
 {
-	if (!m[y] || !m[y][x] || m[y][x] == '1' || m[y][x] == 'F' || m[y][x] == '\n')
+	if (!m[y] || !m[y][x] || m[y][x] == '1' ||
+			m[y][x] == 'E' || m[y][x] == 'F' || m[y][x] == '\n')
+	{
+		if (m[y][x] == 'E')
+			m[y][x] = 'F';
 		return ;
+	}
 	m[y][x] = 'F';
 	flood(m, x + 1, y);
 	flood(m, x - 1, y);
 	flood(m, x, y + 1);
 	flood(m, x, y - 1);
 }
-//Ritorna 1 se c'è ancora 'C' o 'E' non raggiunti
+//Ritorna 1 se c'è ancora 'C'
 static int	has_unreached(char **m, int h, int w)
 {
 	int	y;
@@ -79,7 +84,7 @@ static int	has_unreached(char **m, int h, int w)
 		x = 0;
 		while (x < w)
 		{
-			if (m[y][x] == 'C' || m[y][x] == 'E')
+			if (m[y][x] == 'C' && m[y][x])
 				return (1);
 			x++;
 		}
@@ -89,18 +94,6 @@ static int	has_unreached(char **m, int h, int w)
 }
 
 //verifica che tutte le 'C' (e l'Uscita) siano raggiungibili
-
-/* static void	print_map(char **map, int height)
-{
-	int	y;
-	
-	y = 0;
-	while (y < height)
-	{
-		printf("%s\n", map[y]);
-		y++;
-	}
-} */
 
 int	check_path(t_map map, t_point *player_pos, int *collect)
 {

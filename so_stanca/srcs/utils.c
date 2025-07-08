@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:53:35 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/07 18:38:11 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:14:28 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	map_height(const char *s)
 		char	c;
 
 		lines = 0;
+		nb = 0;
+		c = '\0';
 		fd = open(s, O_RDONLY);
 		if (!fd || fd < 0 || fd > 1024)
 				return (-1);
@@ -113,3 +115,15 @@ void	free_game(t_game *g)
 	free(g->mlx_ptr);
 	free_map(&g->map);
 }
+
+/* static void	print_map(char **map, int height)
+{
+	int	y;
+	
+	y = 0;
+	while (y < height)
+	{
+		printf("%s\n", map[y]);
+		y++;
+	}
+} */
