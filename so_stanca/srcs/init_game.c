@@ -6,7 +6,7 @@
 /*   By: ginobile <ginobile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 12:28:12 by giusnob           #+#    #+#             */
-/*   Updated: 2025/07/07 17:52:12 by ginobile         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:02:50 by ginobile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	init_game(t_game *g)
 		g->map.height * TILE_SIZE, "so_long");
 	if (!g->win_ptr)
 		return (0);
-	load_textures(g);
+	if (!load_textures(g))
+		return (0);
 	g->moves = 0;
 	g->player_dir = DIR_DOWN;
 	return (1);

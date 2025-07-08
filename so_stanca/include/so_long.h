@@ -104,7 +104,7 @@ int		handle_key_release(int key, t_game *g);
 int		handle_destroy(t_game *g);
 
 // textures
-void	load_textures(t_game *g);
+int		load_textures(t_game *g);
 void	destroy_textures(t_game *g);
 
 // utilities 
